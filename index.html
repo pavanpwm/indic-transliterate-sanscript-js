@@ -17,7 +17,37 @@
 </style>
 
 <script type="text/javascript">
+
     var langSelected = "devanagari";
+
+    function tokenize(text){
+        var words = text.split(" ");
+        for (var i = 0; i < words.length - 1; i++) {
+            words[i] += " ";
+        }
+        return words;
+    }
+
+
+
+    function transLit(e){
+        var start = e.target.selectionStart;
+        var end = e.target.selectionEnd;
+         if (e.keyCode === 32 || e.key === ' ' || e.key === 'Enter' || e.keyCode === 13) {
+            var words = tokenize(document.getElementById("reg").value);
+            console.log(words);
+            document.getElementById('reg').value = "";
+            for (var i = 0; i < words.length; i++) {
+                document.getElementById('reg').value += Sanscript.t(words[i], 'itrans',langSelected)
+            }
+        }
+        e.target.setSelectionRange(start, end);
+    }
+
+
+
+
+
 </script>
 
 
@@ -38,9 +68,9 @@
                 <option value="telugu">telugu</option>
             </select>
             <br><br>
-            <input type="text" id="eng" placeholder="English text" oninput="document.getElementById('reg').value = Sanscript.t(this.value, 'itrans',langSelected)">
+            <input type="text" id="eng" placeholder="English text" oninput="document.getElementById('reg').value = Sanscript.t(this.value, 'itrans',langSelected) + ' '" >
             <br><br>
-            <input type="text" id="reg" placeholder="Regional text" >
+            <input type="text" id="reg" placeholder="Regional text" onkeyup="transLit(event)">
         </div>
 
 
