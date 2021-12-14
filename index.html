@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Multilingual Test</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <script src="sanscript.js"></script>
+        <script src="tests.js"></script>
+
+<style type="text/css">
+    div {
+  margin: auto;
+  width: 50%;
+  border: 3px solid green;
+  padding: 10px;
+  text-align: center;
+}
+</style>
+
+<script type="text/javascript">
+    var langSelected = "devanagari";
+</script>
+
+
+    </head>
+    <body>
+        
+        <div>
+            <br><br>
+            <select id="tLang" onchange="langSelected = this.options[this.selectedIndex].value">
+                <option value="devanagari">Hindi</option>
+                <option value="bengali">Bengali</option>
+                <option value="gujarati">gujarati</option>
+                <option value="gurmukhi">gurmukhi</option>
+                <option value="kannada">kannada</option>
+                <option value="malayalam">malayalam</option>
+                <option value="oriya">oriya</option>
+                <option value="tamil">tamil</option>
+                <option value="telugu">telugu</option>
+            </select>
+            <br><br>
+            <input type="text" id="eng" placeholder="English text" oninput="document.getElementById('reg').value = Sanscript.t(this.value, 'itrans',langSelected)">
+            <br><br>
+            <input type="text" id="reg" placeholder="Regional text" >
+        </div>
+
+
+
+    </body>
+</html>
