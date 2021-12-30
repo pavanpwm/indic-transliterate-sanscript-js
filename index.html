@@ -3,6 +3,7 @@
     <head>
         <title>Multilingual Test</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="sanscript.js"></script>
         <script src="tests.js"></script>
 
@@ -41,9 +42,29 @@
                 document.getElementById('reg').value += Sanscript.t(words[i], 'itrans',langSelected)
             }
         }
-        e.target.setSelectionRange(start, end);
+       e.target.setSelectionRange(start, end);
     }
 
+
+function makeApiCall(){
+    var data = {
+        eng : document.getElementById("eng").value,
+        reg : document.getElementById("reg").value
+    };
+
+    $.ajax({
+      type: "POST",
+      contentType: "application/json",
+      url: 'http://localhost:8080/save',
+      data: JSON.stringify(data),
+      dataType: "json",
+        success: function(r){
+            console.log(r);
+        }
+    })
+
+
+}
 
 
 
@@ -71,6 +92,8 @@
             <input type="text" id="eng" placeholder="English text" oninput="document.getElementById('reg').value = Sanscript.t(this.value, 'itrans',langSelected) + ' '" >
             <br><br>
             <input type="text" id="reg" placeholder="Regional text" onkeyup="transLit(event)">
+<br><br>
+            <button onclick="makeApiCall()">Submit</button>
         </div>
 
 
